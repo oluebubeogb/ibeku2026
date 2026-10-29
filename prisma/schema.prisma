@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id           String  @id @default(cuid())
+  code         String  @unique
+  name         String
+  displayOrder Int
+  teams        Team[]
+  matches      Match[]
+}
+
+model Team {
+  id        String  @id @default(cuid())
+  name      String
+  slug      String  @unique
+  shortName String
+  groupId   String
+  group     Group   @relation(fields: [groupId], references: [id])
+  homeMatches Match[] @relation("HomeTeam")
+  awayMatches Match[] @relation("AwayTeam")
+}
+
+model Match {
+  id               String   @id @default(cuid())
+  stage            String   @default("GROUP") // GROUP, QUARTER_FINAL, SEMI_FINAL, THIRD_PLACE, FINAL
+  status           String   @default("SCHEDULED") // SCHEDULED, LIVE, HALF_TIME, FULL_TIME, POSTPONED
+  matchday         Int?
+  slotCode         String?  @unique
+  homeSlot         String?
+  awaySlot         String?
+  groupId          String?
+  group            Group?   @relation(fields: [groupId], references: [id])
+  homeTeamId       String?
+  homeTeam         Team?    @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeamId       String?
+  awayTeam         Team?    @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  kickoffAt        DateTime
+  halfTimeHomeScore Int?
+  halfTimeAwayScore Int?
+  fullTimeHomeScore Int?
+  fullTimeAwayScore Int?
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status])
+  @@index([stage])
+  @@index([kickoffAt])
+}
+
+model AppSetting {
+  key   String @id
+  value String
+}
+
+model Admin {
+  id           String @id @default(cuid())
+  username     String @unique
+  passwordHash String
+}
