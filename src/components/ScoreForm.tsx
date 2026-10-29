@@ -101,7 +101,7 @@ export function ScoreForm({ match }: { match: Match }) {
         <button type="submit" className="btn text-sm" disabled={saving}>
           {saving ? "Saving…" : "Save"}
         </button>
-        {msg && <span className="text-xs text-emerald-400">{msg}</span>}
+        {msg && <span className="text-xs text-emerald-700">{msg}</span>}
       </div>
     </form>
   );

@@ -12,7 +12,7 @@ export default async function FixturesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Fixtures</h1>
+      <h1 className="text-2xl font-bold text-slate-900">Fixtures</h1>
       <div className="space-y-2">
         {matches.map((m) => {
           const home = m.homeTeam?.name || m.homeSlot || "TBD";
@@ -22,18 +22,18 @@ export default async function FixturesPage() {
           });
           const score = m.fullTimeHomeScore != null ? `${m.fullTimeHomeScore} – ${m.fullTimeAwayScore}` : null;
           return (
-            <Link key={m.id} href={`/matches/${m.id}`} className="card flex items-center justify-between gap-3 hover:border-slate-600">
+            <Link key={m.id} href={`/matches/${m.id}`} className="card flex items-center justify-between gap-3 hover:border-slate-300">
               <div>
                 <div className="text-xs text-slate-500">
                   {date}
                   {m.group ? ` · Group ${m.group.code}` : ""}
                   {m.matchday ? ` · MD${m.matchday}` : ""}
                   {m.stage !== "GROUP" ? ` · ${m.stage.replace(/_/g, " ")}` : ""}
-                  {m.status === "LIVE" && <span className="ml-2 rounded bg-red-600 px-1.5 text-[10px] font-bold">LIVE</span>}
+                  {m.status === "LIVE" && <span className="ml-2 rounded bg-red-600 px-1.5 text-[10px] font-bold text-white">LIVE</span>}
                 </div>
-                <div className="mt-1 font-medium">{home} vs {away}</div>
+                <div className="mt-1 font-medium text-slate-900">{home} vs {away}</div>
               </div>
-              {score && <div className="text-lg font-bold tabular-nums text-emerald-400">{score}</div>}
+              {score && <div className="text-lg font-bold tabular-nums text-emerald-700">{score}</div>}
             </Link>
           );
         })}

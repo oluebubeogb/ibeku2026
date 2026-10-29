@@ -32,14 +32,14 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="card space-y-4">
       <div>
-        <label className="mb-1 block text-xs text-slate-400">Username</label>
+        <label className="mb-1 block text-xs text-slate-500">Username</label>
         <input name="username" className="input" required autoComplete="username" />
       </div>
       <div>
-        <label className="mb-1 block text-xs text-slate-400">Password</label>
+        <label className="mb-1 block text-xs text-slate-500">Password</label>
         <input name="password" type="password" className="input" required autoComplete="current-password" />
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <button type="submit" className="btn w-full" disabled={loading}>
         {loading ? "Signing in…" : "Sign in"}
       </button>

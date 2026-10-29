@@ -14,13 +14,13 @@ export default async function KnockoutPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold">Knockout Stage</h1>
+      <h1 className="text-2xl font-bold text-slate-900">Knockout Stage</h1>
       {stages.map((stage) => {
         const list = matches.filter((m) => m.stage === stage);
         if (list.length === 0) return null;
         return (
           <section key={stage}>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500">
               {stage.replace(/_/g, " ")}
             </h2>
             <div className="space-y-2">
@@ -32,12 +32,12 @@ export default async function KnockoutPage() {
                 });
                 const score = m.fullTimeHomeScore != null ? `${m.fullTimeHomeScore} – ${m.fullTimeAwayScore}` : null;
                 return (
-                  <Link key={m.id} href={`/matches/${m.id}`} className="card flex items-center justify-between hover:border-slate-600">
+                  <Link key={m.id} href={`/matches/${m.id}`} className="card flex items-center justify-between hover:border-slate-300">
                     <div>
                       <div className="text-xs text-slate-500">{date} · {m.slotCode}</div>
-                      <div className="mt-1 font-medium">{home} vs {away}</div>
+                      <div className="mt-1 font-medium text-slate-900">{home} vs {away}</div>
                     </div>
-                    {score && <div className="text-lg font-bold tabular-nums text-emerald-400">{score}</div>}
+                    {score && <div className="text-lg font-bold tabular-nums text-emerald-700">{score}</div>}
                   </Link>
                 );
               })}

@@ -28,13 +28,13 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold">Ibeku League 2026</h1>
-        <p className="mt-1 text-sm text-slate-400">Fixtures · Standings · Results</p>
+        <h1 className="text-2xl font-bold text-slate-900">Ibeku League 2026</h1>
+        <p className="mt-1 text-sm text-slate-500">Fixtures · Standings · Results</p>
       </div>
 
       {live.length > 0 && (
         <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-red-400">Live</h2>
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-red-600">Live</h2>
           <div className="space-y-2">
             {live.map((m) => (
               <MatchRow key={m.id} match={m} />
@@ -45,8 +45,8 @@ export default async function HomePage() {
 
       <section>
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Upcoming</h2>
-          <Link href="/fixtures" className="text-xs text-emerald-400 hover:underline">All fixtures →</Link>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Upcoming</h2>
+          <Link href="/fixtures" className="text-xs text-emerald-700 hover:underline">All fixtures →</Link>
         </div>
         <div className="space-y-2">
           {upcoming.length === 0 && <p className="text-sm text-slate-500">No upcoming matches</p>}
@@ -57,7 +57,7 @@ export default async function HomePage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">Recent results</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-500">Recent results</h2>
         <div className="space-y-2">
           {recent.length === 0 && <p className="text-sm text-slate-500">No results yet</p>}
           {recent.map((m) => (
@@ -81,7 +81,7 @@ function MatchRow({ match }: { match: any }) {
       : null;
 
   return (
-    <Link href={`/matches/${match.id}`} className="card flex items-center justify-between gap-3 hover:border-slate-600 transition">
+    <Link href={`/matches/${match.id}`} className="card flex items-center justify-between gap-3 hover:border-slate-300 transition">
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 text-xs text-slate-500">
           <span>{date}</span>
@@ -89,9 +89,9 @@ function MatchRow({ match }: { match: any }) {
           {match.stage !== "GROUP" && <span>· {match.stage.replace("_", " ")}</span>}
           {match.status === "LIVE" && <span className="rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">LIVE</span>}
         </div>
-        <div className="mt-1 font-medium truncate">{home} vs {away}</div>
+        <div className="mt-1 font-medium text-slate-900 truncate">{home} vs {away}</div>
       </div>
-      {score && <div className="text-lg font-bold tabular-nums text-emerald-400">{score}</div>}
+      {score && <div className="text-lg font-bold tabular-nums text-emerald-700">{score}</div>}
     </Link>
   );
 }

@@ -21,7 +21,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
 
   return (
     <div className="space-y-6">
-      <Link href="/fixtures" className="text-sm text-emerald-400 hover:underline">← Fixtures</Link>
+      <Link href="/fixtures" className="text-sm text-emerald-700 hover:underline">← Fixtures</Link>
       <div className="card text-center">
         <div className="text-xs text-slate-500">
           {date}
@@ -30,13 +30,13 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
           {match.stage !== "GROUP" && ` · ${match.stage.replace(/_/g, " ")}`}
         </div>
         <div className="mt-4 flex items-center justify-center gap-6">
-          <div className="flex-1 text-right text-xl font-bold">{home}</div>
-          <div className="text-3xl font-black tabular-nums text-emerald-400">
+          <div className="flex-1 text-right text-xl font-bold text-slate-900">{home}</div>
+          <div className="text-3xl font-black tabular-nums text-emerald-700">
             {match.fullTimeHomeScore != null
               ? `${match.fullTimeHomeScore} – ${match.fullTimeAwayScore}`
               : "vs"}
           </div>
-          <div className="flex-1 text-left text-xl font-bold">{away}</div>
+          <div className="flex-1 text-left text-xl font-bold text-slate-900">{away}</div>
         </div>
         {match.halfTimeHomeScore != null && (
           <div className="mt-2 text-sm text-slate-500">
@@ -46,8 +46,8 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
         <div className="mt-3">
           <span className={`rounded px-2 py-1 text-xs font-semibold ${
             match.status === "LIVE" || match.status === "HALF_TIME" ? "bg-red-600 text-white" :
-            match.status === "FULL_TIME" ? "bg-slate-700 text-slate-200" :
-            "bg-slate-800 text-slate-400"
+            match.status === "FULL_TIME" ? "bg-slate-200 text-slate-700" :
+            "bg-slate-100 text-slate-500"
           }`}>{match.status.replace(/_/g, " ")}</span>
         </div>
       </div>

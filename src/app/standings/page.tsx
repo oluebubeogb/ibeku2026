@@ -18,7 +18,7 @@ export default async function StandingsPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold">Group Standings</h1>
+      <h1 className="text-2xl font-bold text-slate-900">Group Standings</h1>
       {groups.map((g) => {
         const table = calculateTable(
           g.teams.map((t) => ({ id: t.id, name: t.name, shortName: t.shortName, slug: t.slug })),
@@ -26,10 +26,10 @@ export default async function StandingsPage() {
         );
         return (
           <section key={g.id} className="card overflow-x-auto">
-            <h2 className="mb-3 font-semibold text-emerald-400">{g.name}</h2>
+            <h2 className="mb-3 font-semibold text-emerald-700">{g.name}</h2>
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-slate-700 text-left text-xs text-slate-500">
+                <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
                   <th className="pb-2 pr-2">#</th>
                   <th className="pb-2 pr-2">Team</th>
                   <th className="pb-2 px-1 text-center">P</th>
@@ -44,9 +44,9 @@ export default async function StandingsPage() {
               </thead>
               <tbody>
                 {table.map((row, i) => (
-                  <tr key={row.teamId} className={i < 2 ? "bg-emerald-950/40" : ""}>
+                  <tr key={row.teamId} className={i < 2 ? "bg-emerald-50" : ""}>
                     <td className="py-2 pr-2 text-slate-500">{i + 1}</td>
-                    <td className="py-2 pr-2 font-medium">{row.name}</td>
+                    <td className="py-2 pr-2 font-medium text-slate-900">{row.name}</td>
                     <td className="py-2 px-1 text-center tabular-nums">{row.played}</td>
                     <td className="py-2 px-1 text-center tabular-nums">{row.won}</td>
                     <td className="py-2 px-1 text-center tabular-nums">{row.drawn}</td>
@@ -54,7 +54,7 @@ export default async function StandingsPage() {
                     <td className="py-2 px-1 text-center tabular-nums">{row.gf}</td>
                     <td className="py-2 px-1 text-center tabular-nums">{row.ga}</td>
                     <td className="py-2 px-1 text-center tabular-nums">{row.gd > 0 ? `+${row.gd}` : row.gd}</td>
-                    <td className="py-2 pl-1 text-center font-bold tabular-nums text-emerald-400">{row.points}</td>
+                    <td className="py-2 pl-1 text-center font-bold tabular-nums text-emerald-700">{row.points}</td>
                   </tr>
                 ))}
               </tbody>
