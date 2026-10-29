@@ -16,9 +16,9 @@ function formatDate(iso) {
 
 function matchCard(m) {
   const live = m.status === "LIVE" || m.status === "HALF_TIME";
-  const hasScore = m.ft_h != null || live;
-  const h = m.ft_h ?? m.ht_h ?? 0;
-  const a = m.ft_a ?? m.ht_a ?? 0;
+  const hasScore = m.ft_h != null || (live && (m.ft_h != null || m.ht_h != null));
+  const h = m.ft_h ?? m.ht_h;
+  const a = m.ft_a ?? m.ht_a;
 
   let meta = `<span>${formatDate(m.date)}</span>`;
   if (m.grp) meta += `<span class="pill">Group ${m.grp}</span>`;
@@ -27,28 +27,26 @@ function matchCard(m) {
   if (m.slot) meta += `<span>${m.slot}</span>`;
   if (live) meta += `<span class="pill live">LIVE</span>`;
 
-  let body;
-  if (hasScore) {
-    body = `
-      <div class="match-teams">
-        <div class="team-line"><span>${m.homeName}</span><span>${h}</span></div>
-        <div class="team-line"><span>${m.awayName}</span><span>${a}</span></div>
-      </div>`;
+  let line;
+  if (m.ft_h != null || m.ht_h != null) {
+    const hs = m.ft_h ?? m.ht_h ?? 0;
+    const as = m.ft_a ?? m.ht_a ?? 0;
+    line = `<div class="score-line">
+      <span class="team home">${m.homeName}</span>
+      <span class="score">${hs} – ${as}</span>
+      <span class="team away">${m.awayName}</span>
+    </div>`;
   } else {
-    body = `
-      <div class="match-teams">
-        <div class="team-line"><span>${m.homeName}</span></div>
-        <div class="vs-only">vs</div>
-        <div class="team-line"><span>${m.awayName}</span></div>
-      </div>`;
+    line = `<div class="score-line">
+      <span class="team home">${m.homeName}</span>
+      <span class="score vs">vs</span>
+      <span class="team away">${m.awayName}</span>
+    </div>`;
   }
 
   return `<article class="card match">
-    <div>
-      <div class="match-meta">${meta}</div>
-      ${body}
-    </div>
-    ${hasScore && !live && m.status === "FULL_TIME" ? `<div class="score-big">${h}–${a}</div>` : ""}
+    <div class="match-meta">${meta}</div>
+    ${line}
   </article>`;
 }
 
